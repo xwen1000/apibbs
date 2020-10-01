@@ -17,7 +17,9 @@ class VerificationCodeRequest extends FormRequest
                 'required',
                 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
                 'unique:users'
-            ]
+            ],
+            'captcha_key' => 'required|string',
+            'captcha_code' => 'required|string',
         ];
     }
 
@@ -27,6 +29,14 @@ class VerificationCodeRequest extends FormRequest
             'phone.required' => '手机号必填',
             'phone.regex' => '手机号格式不正确',
             'phone.unique' => '该手机号已被注册'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'captcha_key' => '图片验证码 key',
+            'captcha_code' => '图片验证码',
         ];
     }
 }
